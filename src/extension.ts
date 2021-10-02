@@ -24,7 +24,8 @@ import {
   LanguageClientOptions,
   ServerOptions,
   TransportKind,
-  RevealOutputChannelOn
+  RevealOutputChannelOn,
+  ExecuteCommandRequest
 } from "vscode-languageclient/node";
 import { provideCodeLenses } from './lenses';
 let ExtStatusBarItem: StatusBarItem;
@@ -190,8 +191,10 @@ export async function activate(context: ExtensionContext) {
 
   const fileUsagesProvider = new UsagesProvider();
 
-
   disposable.onReady().then(() => {
+    disposable.onRequest(ExecuteCommandRequest.type.method, async ({command, arguments: args}) => {
+      return commands.executeCommand(command, ...args);
+    });
     commands.executeCommand(ELS_COMMANDS.SET_CONFIG, config);
     ExtStatusBarItem.text = "$(telescope) " + 'Ember';
 
@@ -232,6 +235,7 @@ export async function activate(context: ExtensionContext) {
         languages.registerCodeLensProvider(language, { provideCodeLenses })
       );
     });
+
   }
 
 }
