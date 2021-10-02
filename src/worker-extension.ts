@@ -20,7 +20,8 @@ import {
   CloseAction,
   LanguageClient,
   LanguageClientOptions,
-  RevealOutputChannelOn
+  RevealOutputChannelOn,
+  ExecuteCommandRequest
 } from "vscode-languageclient/browser";
 import { provideCodeLenses } from './lenses';
 let ExtStatusBarItem: StatusBarItem;
@@ -190,6 +191,9 @@ export async function activate(context: ExtensionContext) {
 
 
   disposable.onReady().then(() => {
+    disposable.onRequest(ExecuteCommandRequest.type.method, async ({command, arguments: args}) => {
+      return commands.executeCommand(command, ...args);
+    });
     commands.executeCommand(ELS_COMMANDS.SET_CONFIG, config);
     ExtStatusBarItem.text = "$(telescope) " + 'Ember';
 
