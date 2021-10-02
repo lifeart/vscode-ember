@@ -109,6 +109,41 @@ export async function activate(context: ExtensionContext) {
   );
 
   context.subscriptions.push(
+    commands.registerCommand('els.fs.readFile', async (filePath: Uri) => {
+
+      try {
+        const data = await workspace.fs.readFile(filePath);
+        return data.toString();
+      } catch(e) {
+        return null;
+      }
+
+    })
+  )
+
+  context.subscriptions.push(
+    commands.registerCommand('els.fs.stat', async (filePath: Uri) => {
+      try {
+        const data = await workspace.fs.stat(filePath);
+        return data;
+      } catch(e) {
+        return null;
+      }
+    })
+  )
+
+  context.subscriptions.push(
+    commands.registerCommand('els.fs.readDirectory', async (filePath: Uri) => {
+      try {
+        const data = await workspace.fs.readDirectory(filePath);
+        return data;
+      } catch(e) {
+        return null;
+      }
+    })
+  )
+
+  context.subscriptions.push(
     commands.registerCommand(ELS_COMMANDS.GET_USER_INPUT, async (opts: InputBoxOptions, callbackCommandName: string, tail: any) => {
       try {
         let what = await window.showInputBox(opts);
