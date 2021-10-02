@@ -75,6 +75,42 @@ export async function activate(context: ExtensionContext) {
   ExtStatusBarItem.command = ELS_COMMANDS.SET_STATUS_BAR_TEXT;
   ExtStatusBarItem.show();
 
+
+  context.subscriptions.push(
+    commands.registerCommand('els.fs.readFile', async (filePath: Uri) => {
+
+      try {
+        const data = await workspace.fs.readFile(filePath);
+        return data.toString();
+      } catch(e) {
+        return null;
+      }
+
+    })
+  )
+
+  context.subscriptions.push(
+    commands.registerCommand('els.fs.stat', async (filePath: Uri) => {
+      try {
+        const data = await workspace.fs.stat(filePath);
+        return data;
+      } catch(e) {
+        return null;
+      }
+    })
+  )
+
+  context.subscriptions.push(
+    commands.registerCommand('els.fs.readDirectory', async (filePath: Uri) => {
+      try {
+        const data = await workspace.fs.readDirectory(filePath);
+        return data;
+      } catch(e) {
+        return null;
+      }
+    })
+  )
+
   // Push the disposable to the context's subscriptions so that the
   // client can be deactivated on extension deactivation
   context.subscriptions.push(
