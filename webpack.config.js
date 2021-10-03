@@ -74,7 +74,7 @@ const browserServerConfig = /** @type WebpackConfig */ {
 		alias: {},
 		fallback: {
 			path: require.resolve("path-browserify"),
-      util: require.resolve("util"),
+      util: false,
       os: require.resolve("os-browserify/browser"),
       fs: require.resolve("browserify-fs"),
       tty: false,

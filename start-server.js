@@ -6,5 +6,5 @@ const { IPCMessageReader, IPCMessageWriter, createConnection } = require('vscode
 const connection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
 
 
-const server = new Server(connection, { type: 'node' });
+const server = new Server(connection, { type: 'node', fs: 'sync' });
 server.listen();
