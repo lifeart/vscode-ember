@@ -6,7 +6,8 @@ import {
   ExtensionContext,
   window,
   commands,
-  Uri
+  Uri,
+  StatusBarAlignment
 } from "vscode";
 import {
   Message,
@@ -21,10 +22,21 @@ import { COMMANDS as ELS_COMMANDS } from './constants';
 
 export async function activate(context: ExtensionContext) {
 
+  const ExtStatusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 10);
+  ExtStatusBarItem.text = "$(telescope) Ember Loading...";
+  ExtStatusBarItem.command = ELS_COMMANDS.SET_STATUS_BAR_TEXT;
+  ExtStatusBarItem.show();
+
+
   // Options to control the language client
   let clientOptions: LanguageClientOptions = {
     // Register the server for plain text documents
-    documentSelector: ["handlebars", "javascript", "typescript"],
+    documentSelector: ["handlebars", "javascript", "typescript"].map((el) => {
+      return {
+        language: el,
+        scheme: 'file'
+      }
+    }),
     outputChannelName: "Unstable Ember Language Server",
     revealOutputChannelOn: RevealOutputChannelOn.Never,
     synchronize: {},
@@ -76,6 +88,17 @@ export async function activate(context: ExtensionContext) {
   )
 
 
+    // Push the disposable to the context's subscriptions so that the
+  // client can be deactivated on extension deactivation
+  context.subscriptions.push(
+    commands.registerCommand(ELS_COMMANDS.SET_STATUS_BAR_TEXT, async () => {
+      ExtStatusBarItem.text = "$(telescope) " + 'Reloading projects...';
+      await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT);
+      ExtStatusBarItem.text = "$(telescope) " + 'Ember';
+    })
+  );
+
+
 
   // Create the language client and start the client.
   let disposable = createWorkerLanguageClient(context, clientOptions);
@@ -86,10 +109,12 @@ export async function activate(context: ExtensionContext) {
     disposable.onRequest(ExecuteCommandRequest.type.method, async ({command, arguments: args}) => {
       return commands.executeCommand(command, ...args);
     });
+    console.log('execute command');
     commands.executeCommand(ELS_COMMANDS.SET_CONFIG, {local: {
       collectTemplateTokens: false,
       useBuiltinLinting: false
     }});
+    ExtStatusBarItem.text = "$(telescope) " + 'Ember';
 
     window.onDidChangeActiveTextEditor(()=>{
       if (window.activeTextEditor) {
