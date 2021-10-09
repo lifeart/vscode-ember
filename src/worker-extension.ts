@@ -57,7 +57,7 @@ export async function activate(context: ExtensionContext) {
 
       try {
         const data = await workspace.fs.readFile(filePath);
-        return data.toString();
+        return String.fromCharCode.apply(null, data);
       } catch(e) {
         return null;
       }
@@ -69,6 +69,7 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand('els.fs.stat', async (filePath: Uri) => {
       try {
         const data = await workspace.fs.stat(filePath);
+        console.log('fs.stat', data);
         return data;
       } catch(e) {
         return null;
@@ -80,6 +81,7 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand('els.fs.readDirectory', async (filePath: Uri) => {
       try {
         const data = await workspace.fs.readDirectory(filePath);
+        console.log('fs.readDirectory', data);
         return data;
       } catch(e) {
         return null;
@@ -93,7 +95,8 @@ export async function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(ELS_COMMANDS.SET_STATUS_BAR_TEXT, async () => {
       ExtStatusBarItem.text = "$(telescope) " + 'Reloading projects...';
-      await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT);
+      const result = await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT, workspace.rootPath, true);
+      window.showInformationMessage(JSON.stringify(result));
       ExtStatusBarItem.text = "$(telescope) " + 'Ember';
     })
   );
