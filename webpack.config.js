@@ -8,6 +8,8 @@
 //@ts-check
 'use strict';
 
+const buildName = process.env.npm_lifecycle_event;
+
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
@@ -55,5 +57,48 @@ const browserClientConfig = /** @type WebpackConfig */ {
 	// devtool: 'source-map',
 };
 
+const nodeClientConfig = /** @type WebpackConfig */ {
+	context: path.join(__dirname),
+	mode: 'none',
+	target: 'node',
+	entry: {
+		nodeClientMain: './src/extension.ts',
+	},
+	output: {
+		filename: '[name].js',
+		path: path.join(__dirname, 'dist', 'node', 'client'),
+		libraryTarget: 'commonjs',
+	},
+	resolve: {
+		mainFields: ['module', 'main'],
+		extensions: ['.ts', '.js'], // support ts-files and js-files
+	},
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+					},
+				],
+			},
+		],
+	},
+	externals: {
+		vscode: 'commonjs vscode', // ignored because it doesn't exist
+	},
+	performance: {
+		hints: false,
+	},
+	// devtool: 'source-map',
+};
 
-module.exports = [browserClientConfig];
+
+const bundles = [
+  { name: 'web:package', config: browserClientConfig },
+  { name: 'node:package', config: nodeClientConfig }
+]
+
+module.exports = bundles.filter(({name}) => name.startsWith(buildName)).map(e => e.config);

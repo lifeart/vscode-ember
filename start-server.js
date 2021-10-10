@@ -1,4 +1,4 @@
-const { Server } = require('@lifeart/ember-language-server');
+const Server = require('@lifeart/ember-language-server/dist/bundled/node-server').default;
 const { IPCMessageReader, IPCMessageWriter, createConnection } = require('vscode-languageserver/node');
 
 // Create a connection for the server. The connection defaults to Node's IPC as a transport, but
