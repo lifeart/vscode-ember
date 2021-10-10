@@ -1,11 +1,14 @@
 "use strict";
 
 import { UsagesProvider } from './usages-provider';
+import { provideCodeLenses } from './lenses';
+
 import {
   workspace,
   ExtensionContext,
   window,
   commands,
+  languages,
   Uri,
   StatusBarAlignment
 } from "vscode";
@@ -106,13 +109,36 @@ export async function activate(context: ExtensionContext) {
 
   const fileUsagesProvider = new UsagesProvider();
 
+
+  async function openRelatedFile(...rawFile) {
+    let url = Uri.file(rawFile.join(""));
+    commands.executeCommand("vscode.open", url);
+  }
+
+  const langs = [
+    "javascript",
+    "typescript",
+    "handlebars",
+    "css",
+    "less",
+    "scss"
+  ];
+  context.subscriptions.push(
+    commands.registerCommand(ELS_COMMANDS.OPEN_RELATED_FILE, openRelatedFile)
+  );
+  langs.forEach(language => {
+    context.subscriptions.push(
+      languages.registerCodeLensProvider(language, { provideCodeLenses })
+    );
+  });
+
   disposable.onReady().then(() => {
     disposable.onRequest(ExecuteCommandRequest.type.method, async ({command, arguments: args}) => {
       return commands.executeCommand(command, ...args);
     });
     console.log('execute command');
     commands.executeCommand(ELS_COMMANDS.SET_CONFIG, {local: {
-      collectTemplateTokens: false,
+      collectTemplateTokens: true,
       useBuiltinLinting: false
     }});
     ExtStatusBarItem.text = "$(telescope) " + 'Ember';
