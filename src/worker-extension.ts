@@ -69,7 +69,6 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand('els.fs.stat', async (filePath: Uri) => {
       try {
         const data = await workspace.fs.stat(filePath);
-        console.log('fs.stat', data);
         return data;
       } catch(e) {
         return null;
@@ -81,7 +80,6 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand('els.fs.readDirectory', async (filePath: Uri) => {
       try {
         const data = await workspace.fs.readDirectory(filePath);
-        console.log('fs.readDirectory', data);
         return data;
       } catch(e) {
         return null;
