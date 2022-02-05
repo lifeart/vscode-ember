@@ -54,6 +54,16 @@
     "configuration": {
       "title": "Unstable Ember Language Server",
       "properties": {
+        "els.server.debug.port": {
+          "type": "number",
+          "default": 6004,
+          "description": "Language server debug port"
+        },
+        "els.server.debug.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show debug icon to recreate LS instance"
+        },
         "els.codeLens.relatedFiles": {
           "type": "boolean",
           "default": true,
