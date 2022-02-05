@@ -61,8 +61,8 @@
         },
         "els.server.debug.enabled": {
           "type": "boolean",
-          "default": true,
-          "description": "Show debug icon to recreate LS instance"
+          "default": false,
+          "description": "Show debug icon with PID, on click it recreate LS instance"
         },
         "els.codeLens.relatedFiles": {
           "type": "boolean",
