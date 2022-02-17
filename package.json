@@ -17,7 +17,6 @@
   "engines": {
     "vscode": "^1.60.0"
   },
-  "preview": true,
   "categories": [
     "Programming Languages",
     "Linters"
