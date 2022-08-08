@@ -118,7 +118,8 @@
     "web:watch": "webpack --watch",
     "web:package": "webpack --mode production",
     "node:package": "webpack --mode production",
-    "chrome": "npm run web:compile && vscode-test-web --browserType=chromium --extensionDevelopmentPath=."
+    "chrome": "npm run web:compile && vscode-test-web --browserType=chromium --extensionDevelopmentPath=.",
+    "watch-client": "webpack --watch --mode development"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.33",
