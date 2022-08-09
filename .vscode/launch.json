@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.1.0",
   "configurations": [
     {
       "name": "Launch Tests",
@@ -25,6 +25,7 @@
       "args": [
         "--extensionDevelopmentPath=${workspaceRoot}"
       ],
+      "stopOnEntry": false,
       "sourceMaps": true,
       "outFiles": [
         "${workspaceRoot}/out/src/**/*.js"
@@ -43,41 +44,6 @@
       ],
       "restart": true,
       "smartStep": true
-    },
-    {
-      "name": "Launch Client",
-      "type": "extensionHost",
-      "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceRoot}",
-      ],
-      "outFiles": [
-        "${workspaceFolder}/dist/node/client/*.js"
-      ],
-      "preLaunchTask": "Watch client",
-    },
-    // {
-    //   "name": "Launch Web Client",
-    //   "type": "extensionHost",
-    //   "debugWebWorkerHost": true,
-    //   "request": "launch",
-    //   "args": [
-    //     "--extensionDevelopmentPath=${workspaceRoot}",
-    //     "--extensionDevelopmentKind=web"
-    //   ],
-    //   "outFiles": [
-    //     "${workspaceFolder}/dist/web/client/*.js"
-    //   ],
-    //   "preLaunchTask": "Watch client",
-    // },
-  ],
-  "compounds": [
-    {
-      "name": "Client + Server",
-      "configurations": [
-        "Launch Client",
-        "Attach to UELS Server"
-      ]
     }
   ]
 }

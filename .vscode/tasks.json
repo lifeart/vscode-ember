@@ -5,57 +5,36 @@
 // ${fileDirname}: the current opened file's dirname
 // ${fileExtname}: the current opened file's extension
 // ${cwd}: the current working directory of the spawned process
+
+// A task runner that calls a custom npm script that compiles the extension.
 {
-  "version": "2.0.0",
-  "tasks": [
-    // {
-    //   "type": "npm",
-    //   "script": "compile",
-    //   "group": "build",
-    //   "presentation": {
-    //     "panel": "dedicated",
-    //     "reveal": "never"
-    //   },
-    //   "problemMatcher": [
-    //     "$ts-webpack",
-    //     "$tslint-webpack"
-    //   ]
-    // },
-    {
-      "label": "Watch client",
-      "type": "npm",
-      "script": "watch-client",
-      "isBackground": true,
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "dedicated",
-        "reveal": "never"
-      },
-      "problemMatcher": [
-        "$ts-webpack-watch",
-        "$tslint-webpack-watch"
-      ]
-    },
-    // {
-    //   "label": "Watch server",
-    //   "type": "npm",
-    //   "script": "watch-server",
-    //   "isBackground": true,
-    //   "group": {
-    //     "kind": "build",
-    //     "isDefault": true
-    //   },
-    //   "presentation": {
-    //     "panel": "dedicated",
-    //     "reveal": "never"
-    //   },
-    //   "problemMatcher": [
-    //     "$ts-webpack-watch",
-    //     "$tslint-webpack-watch"
-    //   ]
-    // },
-  ]
+	"version": "2.0.0",
+
+	// we want to run npm
+	"command": "npm",
+
+	// we run the custom script "compile" as defined in package.json
+	"args": ["run", "watch", "--loglevel", "silent"],
+
+	// The tsc compiler is started in watching mode
+	"isBackground": true,
+
+	// use the standard tsc in watch mode problem matcher to find compile problems in the output.
+	"problemMatcher": "$tsc-watch",
+	"tasks": [
+		{
+			"label": "npm",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"watch",
+				"--loglevel",
+				"silent"
+			],
+			"isBackground": true,
+			"problemMatcher": "$tsc-watch",
+			"group": "build"
+		}
+	]
 }
