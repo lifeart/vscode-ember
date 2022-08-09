@@ -92,14 +92,13 @@ const nodeClientConfig = /** @type WebpackConfig */ {
 	performance: {
 		hints: false,
 	},
-	devtool: 'source-map',
+	// devtool: 'source-map',
 };
 
-module.exports = [browserClientConfig, nodeClientConfig];
 
-// const bundles = [
-//   { name: 'web:package', config: browserClientConfig },
-//   { name: 'node:package', config: nodeClientConfig }
-// ]
+const bundles = [
+  { name: 'web:package', config: browserClientConfig },
+  { name: 'node:package', config: nodeClientConfig }
+]
 
-// module.exports = bundles.filter(({name}) => name.startsWith(buildName)).map(e => e.config);
+module.exports = bundles.filter(({name}) => name.startsWith(buildName)).map(e => e.config);
