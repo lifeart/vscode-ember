@@ -276,4 +276,3 @@ export async function activate(context: ExtensionContext) {
   }
 
 }
-
