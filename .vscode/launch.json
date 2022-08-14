@@ -21,7 +21,7 @@
 	"compounds": [
 		{
 			"name": "Client + Server",
-			"configurations": ["Launch Client", "Attach"], //Attach from ember-language-server
+			"configurations": ["Launch Client", "Attach"], //"Attach" is in ember-language-server project
       "stopAll": true,
 		}
 	]
