@@ -1,13 +1,13 @@
-# Debugging `vscode-ember` via VSCode
+# Debugging
 
+## Debugging `vscode-ember` via VSCode
  - Run `yarn` to install dependencies
- - Run `yarn build:langserver` to build language server (ts errors ok)
- - Run debug process `Launch UELS Extension`
+ - Run debugger `Launch Client` (press `F5`)
 
-
-## Building development version of `Stable Ember Language Server`
+## Debugging `Stable Ember Language Server` via VSCode
  - Go to `ember-language-server` folder
  - Run `yarn link`
  - Go to `vscode-ember` folder
  - Run `yarn link @lifeart/ember-language-server`
- - Rebuild the language server (`yarn build:langserver`) after every change in the language server code
+ - Add `ember-language-server` folder to workspace, you will have a [multi-root workspace](https://code.visualstudio.com/docs/editor/multi-root-workspaces)
+ - Run debugger `Client + Server`
