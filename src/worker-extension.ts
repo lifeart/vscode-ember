@@ -26,7 +26,7 @@ import { COMMANDS as ELS_COMMANDS } from './constants';
 export async function activate(context: ExtensionContext) {
 
   const ExtStatusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 10);
-  ExtStatusBarItem.text = "$(telescope) Ember Loading...";
+  ExtStatusBarItem.text = "$(ember-logo) Ember Loading...";
   ExtStatusBarItem.command = ELS_COMMANDS.SET_STATUS_BAR_TEXT;
   ExtStatusBarItem.show();
 
@@ -95,10 +95,10 @@ export async function activate(context: ExtensionContext) {
   // client can be deactivated on extension deactivation
   context.subscriptions.push(
     commands.registerCommand(ELS_COMMANDS.SET_STATUS_BAR_TEXT, async () => {
-      ExtStatusBarItem.text = "$(telescope) " + 'Reloading projects...';
+      ExtStatusBarItem.text = "$(ember-logo) " + 'Reloading projects...';
       const result = await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT, workspace.rootPath, true);
       window.showInformationMessage(JSON.stringify(result));
-      ExtStatusBarItem.text = "$(telescope) " + 'Ember';
+      ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
     })
   );
 
@@ -138,7 +138,7 @@ export async function activate(context: ExtensionContext) {
       collectTemplateTokens: true,
       useBuiltinLinting: false
     }});
-    ExtStatusBarItem.text = "$(telescope) " + 'Ember';
+    ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
 
     // Ember File Usages
     new FileUsages();
