@@ -130,7 +130,7 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand(ELS_COMMANDS.SET_STATUS_BAR_TEXT, async () => {
       ExtStatusBarItem.text = "$(ember-logo) " + 'Reloading projects...';
       await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT);
-      ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
+      ExtStatusBarItem.text = "$(ember-logo)";
     })
   );
 
@@ -226,7 +226,7 @@ export async function activate(context: ExtensionContext) {
         return commands.executeCommand(command, ...args);
       });
       commands.executeCommand(ELS_COMMANDS.SET_CONFIG, config);
-      ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
+      ExtStatusBarItem.text = "$(ember-logo)";
 
       // Ember File Usages
       new FileUsages();

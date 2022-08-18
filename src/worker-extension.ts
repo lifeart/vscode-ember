@@ -98,7 +98,7 @@ export async function activate(context: ExtensionContext) {
       ExtStatusBarItem.text = "$(ember-logo) " + 'Reloading projects...';
       const result = await commands.executeCommand(ELS_COMMANDS.RELOAD_PROJECT, workspace.rootPath, true);
       window.showInformationMessage(JSON.stringify(result));
-      ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
+      ExtStatusBarItem.text = "$(ember-logo)";
     })
   );
 
@@ -138,7 +138,7 @@ export async function activate(context: ExtensionContext) {
       collectTemplateTokens: true,
       useBuiltinLinting: false
     }});
-    ExtStatusBarItem.text = "$(ember-logo) " + 'Ember';
+    ExtStatusBarItem.text = "$(ember-logo)";
 
     // Ember File Usages
     new FileUsages();
