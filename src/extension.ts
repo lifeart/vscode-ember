@@ -75,7 +75,7 @@ export async function activate(context: ExtensionContext) {
   };
 
   ExtStatusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 10);
-  ExtStatusBarItem.text = "$(ember-logo) Loading...";
+  ExtStatusBarItem.text = "$(ember-logo) Ember Loading...";
   ExtStatusBarItem.command = ELS_COMMANDS.SET_STATUS_BAR_TEXT;
   ExtStatusBarItem.show();
 
