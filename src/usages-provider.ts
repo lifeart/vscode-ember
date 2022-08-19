@@ -121,22 +121,22 @@ class Dependency extends vscode.TreeItem {
     super(label, collapsibleState);
   }
 
-  // @ts-expect-error
+  // @ts-expect-error: 'tooltip' is defined as a property in class 'TreeItem'
   get tooltip(): string {
     return `${this.label} [${this.type}]`;
   }
 
-  // @ts-expect-error
+  // @ts-expect-error: 'contextValue' is defined as a property in class 'TreeItem'
   get contextValue() {
     return 'file';
   }
 
-  // @ts-expect-error
+  // @ts-expect-error: 'description' is defined as a property in class 'TreeItem'
   get description(): string {
     return this.type;
   }
 
-  // @ts-expect-error
+  // @ts-expect-error: 'command' is defined as a property in class 'TreeItem'
   get command(): vscode.Command {
     return {
       title: '',
@@ -146,7 +146,7 @@ class Dependency extends vscode.TreeItem {
     };
   }
 
-  // @ts-expect-error
+  // @ts-expect-error: 'resourceUri' is defined as a property in class 'TreeItem'
   get resourceUri(): vscode.Uri {
     return vscode.Uri.file(this.fullPath);
   }
