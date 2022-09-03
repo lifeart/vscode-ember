@@ -37,7 +37,7 @@ export class UsagesProvider implements vscode.TreeDataProvider<Dependency> {
 
         vscode.commands.executeCommand(
           'setContext',
-          'emberFileUsagesEnabled',
+          'vscode-ember-unstable.emberFileUsagesEnabled',
           enabled
         );
 
@@ -48,7 +48,7 @@ export class UsagesProvider implements vscode.TreeDataProvider<Dependency> {
     } else {
       vscode.commands.executeCommand(
         'setContext',
-        'emberFileUsagesEnabled',
+        'vscode-ember-unstable.emberFileUsagesEnabled',
         false
       );
     }

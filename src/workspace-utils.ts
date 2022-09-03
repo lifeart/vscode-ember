@@ -19,3 +19,13 @@ export async function isEmberCliProject(): Promise<boolean> {
 
   return emberCliBuildFile.length > 0;
 }
+
+export async function packageAvailable(packageName: string): Promise<boolean> {
+  const files = await workspace.findFiles(
+    `**/node_modules/${packageName}/package.json`,
+    null,
+    1
+  );
+
+  return files.length > 0;
+}
