@@ -17,6 +17,7 @@ import {
   InputBoxOptions,
   StatusBarAlignment,
   Uri,
+  extensions,
 } from 'vscode';
 import { isEmberCliProject, isGlimmerXProject } from './workspace-utils';
 import {
@@ -30,7 +31,12 @@ import {
 import { provideCodeLenses } from './lenses';
 let ExtStatusBarItem: StatusBarItem;
 let ExtServerDebugBarItem: StatusBarItem;
+const OFFICIAL_EMBER_LANGUAGE_SERVER = 'EmberTooling.vscode-ember';
 export async function activate(context: ExtensionContext) {
+  const extension = extensions.getExtension(OFFICIAL_EMBER_LANGUAGE_SERVER);
+  if (extension && extension.isActive) {
+    return;
+  }
   // The server is implemented in node
   const serverModule = path.join(context.extensionPath, './start-server.js');
   const config = workspace.getConfiguration('els');
