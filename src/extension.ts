@@ -19,7 +19,11 @@ import {
   Uri,
   extensions,
 } from 'vscode';
-import { isEmberCliProject, isGlimmerXProject } from './workspace-utils';
+import {
+  isEmberCliProject,
+  isGlimmerXProject,
+  packageAvailable,
+} from './workspace-utils';
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -316,4 +320,12 @@ export async function activate(context: ExtensionContext) {
       );
     });
   }
+
+  const emberFastCliAvailable = await packageAvailable('ember-fast-cli');
+
+  commands.executeCommand(
+    'setContext',
+    'vscode-ember-unstable.emberFastCliAvailable',
+    emberFastCliAvailable
+  );
 }

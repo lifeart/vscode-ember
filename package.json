@@ -43,14 +43,15 @@
         {
           "id": "els.fileUsages",
           "name": "Ember File Usages",
-          "when": "emberFileUsagesEnabled"
+          "when": "vscode-ember-unstable.emberFileUsagesEnabled"
         }
       ]
     },
     "commands": [
       {
         "command": "els.runInEmberCLI",
-        "title": "Ember: Execute ember-cli command"
+        "title": "Ember: Execute ember-cli command",
+        "enablement": "vscode-ember-unstable.emberFastCliAvailable"
       }
     ],
     "configuration": {
