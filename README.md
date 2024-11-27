@@ -1,5 +1,8 @@
 # vscode-ember
 
+> [!IMPORTANT]  
+> This fork now merged to official language server, so, for actual codebase look at [ember-tooling/vscode-ember](https://github.com/ember-tooling/vscode-ember)
+
 This is the VSCode extension to use the [Stable Ember Language Server](https://github.com/lifeart/ember-language-server).
 
 `Stable Ember Language Server` is full-featured fork of [Ember Language Server](https://github.com/ember-tooling/ember-language-server). It's `stable` and `extremely` power-featured.
